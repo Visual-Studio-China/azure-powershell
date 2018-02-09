@@ -29,8 +29,8 @@ build_script:
 
 test: off
 on_success:
-  - git clone -q --branch=%target_branch% %content_repo% %TEMP%\Azure
+  - git clone -q --branch=master %content_repo% %TEMP%\Azure
   - cd %TEMP%\Azure
   - ps: ls c:\projects\_output -dir | % { copy $_.FullName . -Recurse -Force }
   - git add -A
-  - git diff --quiet --exit-code --cached || git commit -m "Sync docs from source code repo to content repo." && git push origin %target_branch% && appveyor AddMessage "Content Updated"
+  - git diff --quiet --exit-code --cached || git commit -m "Sync docs from source code repo to content repo." && git push origin master:%target_branch% && appveyor AddMessage "Content Updated"
